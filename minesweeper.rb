@@ -46,11 +46,12 @@ class MineSweeper
 
   def get_pos
     pos = nil
-    until pos && valid_pos?(pos) || !@playing
+
+    until (pos && valid_pos?(pos)) || !@playing
       puts "Please enter a position (e.g. 1,3)"
       print ">"
 
-      pos = parse_pos(gets.chomp)
+      pos = parse_pos(STDIN.gets.chomp)
     end
 
     pos
@@ -92,7 +93,7 @@ class MineSweeper
       puts "Would you like to reveal (r), flag (f), or unflag (u) the position?"
       print ">"
 
-      val = gets.chomp
+      val = STDIN.gets.chomp
     end
 
     val
@@ -114,13 +115,10 @@ end
 
 
 if $PROGRAM_NAME == __FILE__
-  board = ARGV[0] || Board.new()
   unless ARGV[0].nil?
-    g = MineSweeper.new(YAML.load_file(ARGV[0]))
+    g = MineSweeper.new(YAML.load_file(ARGV[0].chomp))
   else
     g = MineSweeper.new(Board.new())
   end
-  #g = MineSweeper.new(YAML.load_file("save_game.yml"))
-  g = MineSweeper.new(Board.new())
   g.play
 end
