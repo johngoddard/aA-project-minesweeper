@@ -1,0 +1,404 @@
+--- !ruby/object:Board
+size: 9
+num_bombs: 10
+grid:
+- - !ruby/object:Tile
+    status: :revealed
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :revealed
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :revealed
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :revealed
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :revealed
+    fringe_value: 1
+    bomb: false
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: true
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: true
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: false
+- - !ruby/object:Tile
+    status: :revealed
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :revealed
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :revealed
+    fringe_value: 1
+    bomb: false
+  - !ruby/object:Tile
+    status: :revealed
+    fringe_value: 1
+    bomb: false
+  - !ruby/object:Tile
+    status: :revealed
+    fringe_value: 2
+    bomb: false
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: false
+- - !ruby/object:Tile
+    status: :revealed
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :revealed
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :revealed
+    fringe_value: 1
+    bomb: false
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: true
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: false
+- - !ruby/object:Tile
+    status: :revealed
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :revealed
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :revealed
+    fringe_value: 1
+    bomb: false
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: false
+- - !ruby/object:Tile
+    status: :revealed
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :revealed
+    fringe_value: 1
+    bomb: false
+  - !ruby/object:Tile
+    status: :revealed
+    fringe_value: 1
+    bomb: false
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: true
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: false
+- - !ruby/object:Tile
+    status: :revealed
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :revealed
+    fringe_value: 1
+    bomb: false
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: true
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: true
+- - !ruby/object:Tile
+    status: :revealed
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :revealed
+    fringe_value: 1
+    bomb: false
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: true
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: false
+- - !ruby/object:Tile
+    status: :revealed
+    fringe_value: 1
+    bomb: false
+  - !ruby/object:Tile
+    status: :revealed
+    fringe_value: 1
+    bomb: false
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: false
+- - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: true
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: true
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: true
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: false
+  - !ruby/object:Tile
+    status: :hidden
+    fringe_value: 
+    bomb: false
+tiles_to_reveal:
+  ? - 0
+    - 0
+  : 0
+  ? - 1
+    - 0
+  : 0
+  ? - 0
+    - 1
+  : 0
+  ? - 1
+    - 1
+  : 0
+  ? - 2
+    - 0
+  : 0
+  ? - 2
+    - 1
+  : 0
+  ? - 0
+    - 2
+  : 0
+  ? - 1
+    - 2
+  : 1
+  ? - 2
+    - 2
+  : 1
+  ? - 3
+    - 0
+  : 0
+  ? - 3
+    - 1
+  : 0
+  ? - 3
+    - 2
+  : 1
+  ? - 0
+    - 3
+  : 0
+  ? - 1
+    - 3
+  : 1
+  ? - 4
+    - 0
+  : 0
+  ? - 4
+    - 1
+  : 1
+  ? - 4
+    - 2
+  : 1
+  ? - 0
+    - 4
+  : 1
+  ? - 1
+    - 4
+  : 2
+  ? - 5
+    - 0
+  : 0
+  ? - 5
+    - 1
+  : 1
+  ? - 6
+    - 0
+  : 0
+  ? - 6
+    - 1
+  : 1
+  ? - 7
+    - 0
+  : 1
+  ? - 7
+    - 1
+  : 1

@@ -1,5 +1,6 @@
 require_relative "tile"
 require_relative "board"
+require "yaml"
 
 class MineSweeper
   def initialize(board)
@@ -7,13 +8,15 @@ class MineSweeper
   end
 
   def play
-    until won? || lost?
+    @playing = true
+
+    until (won? || lost?) || !@playing
       system("clear")
       show_board
       pos = get_pos
       val = get_val
 
-      make_move(pos, val)
+      make_move(pos, val) if @playing
     end
   end
 
@@ -43,8 +46,8 @@ class MineSweeper
 
   def get_pos
     pos = nil
-    until pos && valid_pos?(pos)
-      puts "Please enter a positions (e.g. 1,3)"
+    until pos && valid_pos?(pos) || !@playing
+      puts "Please enter a position (e.g. 1,3)"
       print ">"
 
       pos = parse_pos(gets.chomp)
@@ -53,9 +56,20 @@ class MineSweeper
     pos
   end
 
+  def save_game
+    saved_board = @board.to_yaml
+    File.open("saved_game_#{Time.now.strftime("%H:%M")}.yml", 'w') {|f| f.write saved_board}
+    @playing = false
+    puts "Game is saved"
+  end
+
   def parse_pos(string)
-    raw_pos = string.split(",").map(&:to_i)
-    raw_pos.map{|n| n - 1}
+    if string == "save"
+      save_game
+    else
+      raw_pos = string.split(",").map(&:to_i)
+      raw_pos.map{|n| n - 1}
+    end
   end
 
   def valid_pos?(pos)
@@ -72,7 +86,7 @@ class MineSweeper
   def get_val
     val = nil
 
-    until val && valid_val?(val)
+    until val && valid_val?(val) || !@playing
       puts "Would you like to reveal (r), flag (f), or unflag (u) the position?"
       print ">"
 
@@ -99,6 +113,6 @@ end
 
 if $PROGRAM_NAME == __FILE__
   b = Board.new(9,10)
-  g = MineSweeper.new(Board.new(9, 10))
+  g = MineSweeper.new(YAML.load_file("saved_game.yml"))
   g.play
 end
