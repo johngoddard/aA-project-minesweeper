@@ -59,6 +59,55 @@ class Board
     set_fringe_vals
   end
 
+  def render_end(won)
+    puts "  #{(0...@size).to_a.join(" ")}"
+
+    @grid.each_with_index do |row, row_num|
+      print "#{row_num}"
+      row.each do |tile|
+        if tile.bomb?
+          color = won ? :white : :red
+          print " B".colorize(color)
+        else
+          print " #{tile.to_s}"
+        end
+      end
+      puts
+    end
+  end
+
+  def render
+    puts "  #{(1..@size).to_a.join(" ")}"
+
+    @grid.each_with_index do |row, row_num|
+      print "#{row_num+1} "
+      print row.map{|tile| tile.to_s}.join(" ")
+      puts
+    end
+  end
+
+  def tile_status(pos)
+    self[pos].status
+  end
+
+  def won?
+    @grid.each do |row|
+      return false if row.any?{|tile| !tile.bomb? && tile.status != :revealed}
+    end
+
+    true
+  end
+
+  def lost?
+    @grid.each do |row|
+      return true if row.any?{|tile| tile.bomb? && tile.status == :revealed}
+    end
+
+    false
+  end
+
+  private
+
   def set_fringe_vals
     @tiles_to_reveal.each do |pos, bombs|
       self[pos].fringe_value = bombs if bombs > 0
@@ -95,59 +144,9 @@ class Board
     end
   end
 
-  def render
-    puts "  #{(1..@size).to_a.join(" ")}"
-
-    @grid.each_with_index do |row, row_num|
-      print "#{row_num+1} "
-      print row.map{|tile| tile.to_s}.join(" ")
-      puts
-    end
-  end
-
-  def tile_status(pos)
-    self[pos].status
-  end
-
-  def won?
-    @grid.each do |row|
-      return false if row.any?{|tile| !tile.bomb? && tile.status != :revealed}
-    end
-
-    true
-  end
-
-  def lost?
-    @grid.each do |row|
-      return true if row.any?{|tile| tile.bomb? && tile.status == :revealed}
-    end
-
-    false
-  end
-
-  def render_end(won)
-    puts "  #{(0...@size).to_a.join(" ")}"
-
-    @grid.each_with_index do |row, row_num|
-      print "#{row_num}"
-      row.each do |tile|
-        if tile.bomb?
-          color = won ? :white : :red
-          print " B".colorize(color)
-        else
-          print " #{tile.to_s}"
-        end
-      end
-      puts
-    end
-  end
-
-  private
-
   def randomly_seed
     bombs = bomb_positions
-
-    #bombs = [[0,0], [1,1], [2,2], [3,3]]
+    
     (0...@size).each do |row|
       (0...@size).each do |col|
         if bombs.include?([row,col])
