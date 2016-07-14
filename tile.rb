@@ -1,25 +1,30 @@
+require 'colorize'
+
 class Tile
-  attr_accessor :status
+  attr_accessor :status, :fringe_value
 
   OUTPUT_STRINGS = {
     hidden: "X",
-    explored: "_",
+    revealed: "_",
     flagged: "F"
   }
 
-  def initialize(board, bomb)
-    @board = board
+  FRINGE_COLORS = [:blue, :green, :yellow, :orange, :purple, :purple, :purple, :purple]
+
+
+  def initialize(bomb)
     @status = :hidden
     @fringe_value = nil
     @bomb = bomb
   end
 
   def to_s
-    @fringe_value.nil? ? OUTPUT_STRINGS[status] : @fringe_value.to_s
+    @fringe_value.nil? ? OUTPUT_STRINGS[status] :
+    @fringe_value.to_s.colorize(FRINGE_COLORS[@fringe_value - 1])
   end
 
   def reveal(fringe = false, fringe_val = nil)
-    @status = :explored
+    @status = :revealed
     @fringe_val = fringe_val if fringe
   end
 
@@ -28,7 +33,7 @@ class Tile
   end
 
   def bomb?
-    false
+    @bomb
   end
 
   def inspect
