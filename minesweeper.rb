@@ -58,7 +58,9 @@ class MineSweeper
 
   def save_game
     saved_board = @board.to_yaml
-    File.open("saved_game_#{Time.now.strftime("%H:%M")}.yml", 'w') {|f| f.write saved_board}
+      File.open("saved_game_#{Time.now.strftime("%H:%M")}.yml", 'w') do |f|
+        f.write saved_board
+      end
     @playing = false
     puts "Game is saved"
   end
@@ -112,7 +114,13 @@ end
 
 
 if $PROGRAM_NAME == __FILE__
-  b = Board.new(9,10)
-  g = MineSweeper.new(YAML.load_file("saved_game.yml"))
+  board = ARGV[0] || Board.new()
+  unless ARGV[0].nil?
+    g = MineSweeper.new(YAML.load_file(ARGV[0]))
+  else
+    g = MineSweeper.new(Board.new())
+  end
+  #g = MineSweeper.new(YAML.load_file("save_game.yml"))
+  g = MineSweeper.new(Board.new())
   g.play
 end
