@@ -59,10 +59,12 @@ class MineSweeper
 
   def save_game
     saved_board = @board.to_yaml
-      File.open("saved_game_#{Time.now.strftime("%H:%M")}.yml", 'w') do |f|
-        f.write saved_board
-      end
+    File.open("saved_game_#{Time.now.strftime("%H:%M")}.yml", 'w') do |f|
+      f.write saved_board
+    end
+
     @playing = false
+    
     puts "Game is saved"
   end
 

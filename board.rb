@@ -146,7 +146,7 @@ class Board
 
   def randomly_seed
     bombs = bomb_positions
-    
+
     (0...@size).each do |row|
       (0...@size).each do |col|
         if bombs.include?([row,col])
