@@ -23,10 +23,6 @@ class MineSweeper
 
   private
 
-  def make_move(pos, val)
-
-  end
-
   def won?
     if @board.won?
       puts "player wins!"

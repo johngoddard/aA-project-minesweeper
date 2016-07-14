@@ -28,10 +28,20 @@ class Board
 
   def update_tile(pos, val)
     if val == "r"
+      return if flagged?(pos)
       update_board(pos)
     else
       self[pos].status = INPUT_VAL_MAP[val.to_sym]
     end
+  end
+
+  def flagged?(pos)
+    if self[pos].status == :flagged
+      puts "You can't reveal a flagged mine!"
+      sleep(1)
+      return true
+    end
+    false
   end
 
   def update_board(pos)
