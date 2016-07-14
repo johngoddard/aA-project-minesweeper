@@ -116,9 +116,8 @@ end
 
 if $PROGRAM_NAME == __FILE__
   unless ARGV[0].nil?
-    g = MineSweeper.new(YAML.load_file(ARGV[0].chomp))
+    MineSweeper.new(YAML.load_file(ARGV[0].chomp)).play
   else
-    g = MineSweeper.new(Board.new())
+    MineSweeper.new(Board.new()).play
   end
-  g.play
 end
