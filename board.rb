@@ -26,7 +26,6 @@ class Board
   def initialize(size = 9, bombs = 10)
     @size = size
     @grid = Array.new(size){Array.new(size)}
-    @tiles_to_reveal = {}
     place_bombs(bombs)
   end
 
@@ -104,7 +103,7 @@ class Board
     elsif self[pos].bomb?
       self[pos].status = :revealed
     else
-      update_board(pos)
+      explore_tile(pos)
     end
   end
 
@@ -117,25 +116,15 @@ class Board
     false
   end
 
-  def reveal_tiles
-    @tiles_to_reveal.each do |pos, bombs|
-      self[pos].status = :revealed
-      self[pos].fringe_value = bombs if bombs > 0
-    end
-  end
-
-  def update_board(pos)
-    @tiles_to_reveal = {}
-    explore_tile(pos)
-    reveal_tiles
-  end
-
   def explore_tile(pos)
-    return if self[pos].status == :revealed || @tiles_to_reveal.keys.include?(pos)
+    return if self[pos].status == :revealed
 
     adjacent_tiles = get_adjacent(pos)
     surrounding_bombs = adjacent_tiles.select{|pos| self[pos].bomb?}.size
-    @tiles_to_reveal[pos] = surrounding_bombs
+
+    self[pos].status = :revealed
+    self[pos].fringe_value = surrounding_bombs if surrounding_bombs > 0
+
 
     return if surrounding_bombs > 0
 

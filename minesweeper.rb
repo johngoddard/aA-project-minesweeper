@@ -8,15 +8,14 @@ class MineSweeper
   end
 
   def play
-    @playing = true
 
-    until (won? || lost?) || !@playing
+    until (won? || lost?)
       system("clear")
       show_board
       pos = get_pos
       val = get_val
 
-      make_move(pos, val) if @playing
+      make_move(pos, val)
     end
   end
 
@@ -48,7 +47,7 @@ class MineSweeper
   def get_pos
     pos = nil
 
-    until (pos && valid_pos?(pos)) || !@playing
+    until (pos && valid_pos?(pos))
       puts "Please enter a position (e.g. 1,3)"
       print ">"
 
@@ -82,7 +81,7 @@ class MineSweeper
   def get_val
     val = nil
 
-    until val && valid_val?(val) || !@playing
+    until val && valid_val?(val) 
       puts "Would you like to reveal (r), flag (f), or unflag (u) the position?"
       print ">"
 
@@ -107,8 +106,6 @@ class MineSweeper
     File.open("saved_games/saved_game_#{Time.now.strftime("%H:%M")}.yml", 'w') do |f|
       f.write saved_board
     end
-
-    @playing = false
 
     puts "Game is saved"
   end
