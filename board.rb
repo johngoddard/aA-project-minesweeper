@@ -134,7 +134,6 @@ class Board
     to_explore.each{|pos| explore_tile(pos)}
   end
 
-
   def get_adjacent(pos)
     adjacent_positions = []
 
