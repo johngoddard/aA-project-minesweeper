@@ -11,7 +11,7 @@ class Board
     @size = size
     @num_bombs = bombs
     @grid = Array.new(size){Array.new(size)}
-    randomly_seed
+    place_bombs
     @tiles_to_reveal = {}
   end
 
@@ -28,8 +28,7 @@ class Board
 
   def update_tile(pos, val)
     if val == "r"
-      return if flagged?(pos)
-      update_board(pos)
+      reveal_tile(pos)
     else
       self[pos].status = INPUT_VAL_MAP[val.to_sym]
     end
@@ -84,6 +83,16 @@ class Board
 
   private
 
+  def reveal_tile(pos)
+    if flagged?(pos)
+      return
+    elsif self[pos].bomb?
+      self[pos].status = :revealed
+    else
+      update_board(pos)
+    end
+  end
+
   def flagged?(pos)
     if self[pos].status == :flagged
       puts "You can't reveal a flagged mine!"
@@ -137,7 +146,7 @@ class Board
     end
   end
 
-  def randomly_seed
+  def place_bombs
     bombs = bomb_positions
 
     (0...@size).each do |row|

@@ -15,7 +15,16 @@ class Tile
     flagged: :light_blue
   }
 
-  FRINGE_COLORS = [:blue, :green, :yellow, :light_red, :light_magenta, :magenta, :magenta, :magenta]
+  FRINGE_COLORS = [
+    :blue,
+    :green,
+    :yellow,
+    :light_red,
+    :light_magenta,
+    :magenta,
+    :magenta,
+    :magenta
+  ]
 
 
   def initialize(bomb)
