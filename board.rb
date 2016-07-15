@@ -35,30 +35,6 @@ class Board
     end
   end
 
-  def flagged?(pos)
-    if self[pos].status == :flagged
-      puts "You can't reveal a flagged mine!"
-      sleep(1)
-      return true
-    end
-    false
-  end
-
-  def update_board(pos)
-    @tiles_to_reveal = {}
-    tiles_to_explore = [pos]
-
-    until tiles_to_explore.empty?
-      to_explore = tiles_to_explore.shift
-      self[to_explore].status = :revealed
-      return if self[to_explore].bomb?
-
-      tiles_to_explore += explore_tile(to_explore)
-    end
-
-    set_fringe_vals
-  end
-
   def render_end(won)
     puts "  #{(0...@size).to_a.join(" ")}"
 
@@ -108,25 +84,42 @@ class Board
 
   private
 
-  def set_fringe_vals
+  def flagged?(pos)
+    if self[pos].status == :flagged
+      puts "You can't reveal a flagged mine!"
+      sleep(1)
+      return true
+    end
+    false
+  end
+
+  def reveal_tiles
     @tiles_to_reveal.each do |pos, bombs|
+      self[pos].status = :revealed
       self[pos].fringe_value = bombs if bombs > 0
     end
   end
 
+  def update_board(pos)
+    @tiles_to_reveal = {}
+    explore_tile(pos)
+    reveal_tiles
+  end
 
   def explore_tile(pos)
+    return if self[pos].status == :revealed || @tiles_to_reveal.keys.include?(pos)
+
     adjacent_tiles = get_adjacent(pos)
-
     surrounding_bombs = adjacent_tiles.select{|pos| self[pos].bomb?}.size
-
     @tiles_to_reveal[pos] = surrounding_bombs
 
-    if surrounding_bombs > 0
-      return []
-    else
-      adjacent_tiles.select{|tile| !self[tile].bomb? && self[tile].status != :revealed}
+    return if surrounding_bombs > 0
+
+    to_explore = adjacent_tiles.select do |tile|
+      !self[tile].bomb? && self[tile].status != :revealed
     end
+
+    to_explore.each{|pos| explore_tile(pos)}
   end
 
 

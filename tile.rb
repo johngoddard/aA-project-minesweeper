@@ -19,7 +19,7 @@ class Tile
   end
 
   def to_s
-    @fringe_value.nil? ? OUTPUT_STRINGS[status] :
+    @fringe_value.nil? ? OUTPUT_STRINGS[status].colorize(OUTPUT_COLORS[status]) :
     @fringe_value.to_s.colorize(FRINGE_COLORS[@fringe_value - 1])
   end
 
