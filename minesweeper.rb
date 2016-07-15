@@ -64,7 +64,7 @@ class MineSweeper
     end
 
     @playing = false
-    
+
     puts "Game is saved"
   end
 
@@ -122,4 +122,5 @@ if $PROGRAM_NAME == __FILE__
   else
     MineSweeper.new(Board.new()).play
   end
+
 end
