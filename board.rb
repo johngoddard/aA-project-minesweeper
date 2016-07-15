@@ -118,7 +118,6 @@ class Board
 
   def explore_tile(pos)
     return if self[pos].status != :hidden
-
     adjacent_tiles = get_adjacent(pos)
     surrounding_bombs = adjacent_tiles.select{|pos| self[pos].bomb?}.size
 
