@@ -120,7 +120,7 @@ if $PROGRAM_NAME == __FILE__
   unless ARGV[0].nil?
     MineSweeper.new(YAML.load_file(ARGV[0].chomp)).play
   else
-    MineSweeper.new(Board.new()).play
+    MineSweeper.new(Board.new(9, 10)).play
   end
 
 end
