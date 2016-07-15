@@ -29,8 +29,8 @@ class MineSweeper
 
   def won?
     if @board.won?
-      puts "player wins!"
       system("clear")
+      puts "player wins!"
       @board.render_end(true)
     end
     @board.won?
@@ -72,8 +72,8 @@ class MineSweeper
       pos.is_a?(Array) &&
       pos.size == 2 &&
       pos.all?{|el| el.is_a?(Integer) && el.between?(0, @board.size - 1)} &&
-      @board.tile_status(pos) == :hidden
-      )
+      @board.tile_status(pos) != :revealed
+    )
 
     puts "Invalid position! Try again!" unless valid
     valid
