@@ -1,7 +1,6 @@
 require 'colorize'
 
 class Tile
-  attr_accessor :status, :fringe_value
 
   OUTPUT_STRINGS = {
     hidden: "X",
@@ -26,6 +25,7 @@ class Tile
     :magenta
   ]
 
+  attr_accessor :status, :fringe_value
 
   def initialize(bomb)
     @status = :hidden

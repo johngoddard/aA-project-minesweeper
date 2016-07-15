@@ -3,16 +3,31 @@ require 'byebug'
 require 'colorize'
 
 class Board
+
+  INPUT_VAL_MAP = {
+    "r": :revealed,
+    "f": :flagged,
+    "u": :hidden
+  }
+
+  ADJACENT_MOVES = [
+    [1,0],
+    [0,1],
+    [-1, 0],
+    [0, -1],
+    [1,1],
+    [1, -1],
+    [-1, 1],
+    [-1, -1]
+  ]
+
   attr_reader :size
-  INPUT_VAL_MAP = {"r": :revealed, "f": :flagged, "u": :hidden}
-  ADJACENT_MOVES = [[1,0],[0,1], [-1, 0], [0, -1], [1,1], [1, -1], [-1, 1], [-1, -1]]
 
   def initialize(size = 9, bombs = 10)
     @size = size
-    @num_bombs = bombs
     @grid = Array.new(size){Array.new(size)}
-    place_bombs
     @tiles_to_reveal = {}
+    place_bombs(bombs)
   end
 
 
@@ -35,10 +50,10 @@ class Board
   end
 
   def render_end(won)
-    puts "  #{(0...@size).to_a.join(" ")}"
+    puts "  #{(1..@size).to_a.join(" ")}"
 
     @grid.each_with_index do |row, row_num|
-      print "#{row_num}"
+      print "#{row_num + 1}"
       row.each do |tile|
         if tile.bomb?
           color = won ? :white : :red
@@ -146,8 +161,8 @@ class Board
     end
   end
 
-  def place_bombs
-    bombs = bomb_positions
+  def place_bombs(num_bombs)
+    bombs = bomb_positions(num_bombs)
 
     (0...@size).each do |row|
       (0...@size).each do |col|
@@ -161,7 +176,7 @@ class Board
 
   end
 
-  def bomb_positions
+  def bomb_positions(num_bombs)
     all_positions = []
     (0...@size).each do |row|
       (0...@size).each do |col|
@@ -169,7 +184,7 @@ class Board
       end
     end
 
-    all_positions.shuffle.take(@num_bombs)
+    all_positions.shuffle.take(num_bombs)
   end
 
 

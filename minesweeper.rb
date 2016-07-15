@@ -20,11 +20,12 @@ class MineSweeper
     end
   end
 
+
+  private
+
   def show_board
     @board.render
   end
-
-  private
 
   def won?
     if @board.won?
@@ -57,17 +58,6 @@ class MineSweeper
     pos
   end
 
-  def save_game
-    saved_board = @board.to_yaml
-    File.open("saved_game_#{Time.now.strftime("%H:%M")}.yml", 'w') do |f|
-      f.write saved_board
-    end
-
-    @playing = false
-
-    puts "Game is saved"
-  end
-
   def parse_pos(string)
     if string == "save"
       save_game
@@ -82,8 +72,9 @@ class MineSweeper
       pos.is_a?(Array) &&
       pos.size == 2 &&
       pos.all?{|el| el.is_a?(Integer) && el.between?(0, @board.size - 1)} &&
-      @board.tile_status(pos) != :revealed
+      @board.tile_status(pos) == :hidden
       )
+
     puts "Invalid position! Try again!" unless valid
     valid
   end
@@ -101,8 +92,6 @@ class MineSweeper
     val
   end
 
-
-
   def valid_val?(val)
     valid = val.size == 1 && ["r", "f", "u"].include?(val)
     puts "Invalid move! Try again!" unless valid
@@ -111,6 +100,17 @@ class MineSweeper
 
   def make_move(pos, val)
     @board.update_tile(pos, val)
+  end
+
+  def save_game
+    saved_board = @board.to_yaml
+    File.open("saved_game_#{Time.now.strftime("%H:%M")}.yml", 'w') do |f|
+      f.write saved_board
+    end
+
+    @playing = false
+
+    puts "Game is saved"
   end
 
 end
